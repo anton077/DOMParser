@@ -32,7 +32,7 @@ public class MainActivity extends ListActivity {
 
 
         //final TextView textView = new TextView(this);
-        final ListView listView = new ListView(this);
+        //final ListView list = new ListView(this);
 
 
         //new ConnectTask(). execute("http://abelski.com/image.png");
@@ -44,6 +44,8 @@ public class MainActivity extends ListActivity {
                 HttpURLConnection con = null;
                 //StringBuffer stringBuffer = new StringBuffer();
                 List<String> stringList = new LinkedList<String>();
+
+
 
 
              @Override
@@ -67,13 +69,17 @@ public class MainActivity extends ListActivity {
 
                         for (int i = 0; i < length; i++) {
                            // stringBuffer.append(nameList.item(i).getFirstChild().getNodeValue());
-                            stringList.add(nameList.item(i).getFirstChild().getNodeValue());
+                            stringList.add(nameList.item(i).getFirstChild().getNodeValue()+
+                                            " "+ countryList.item(i).getFirstChild().getNodeValue()+
+                                            ": " + rateList.item(i).getFirstChild().getNodeValue()+
+                                            " (" + changeList.item(i).getFirstChild().getNodeValue() + ")"
+                            );
                            // stringBuffer.append(" "+countryList.item(i).getFirstChild().getNodeValue());
-                            stringList.add(" "+countryList.item(i).getFirstChild().getNodeValue());
+                           // stringList.add(" " + countryList.item(i).getFirstChild().getNodeValue());
                             // stringBuffer.append(": " + rateList.item(i).getFirstChild().getNodeValue());
-                            stringList.add(": " + rateList.item(i).getFirstChild().getNodeValue());
+                          //  stringList.add(": " + rateList.item(i).getFirstChild().getNodeValue());
                            // stringBuffer.append(" (" + changeList.item(i).getFirstChild().getNodeValue() + ")\n\n");
-                            stringList.add(" (" + changeList.item(i).getFirstChild().getNodeValue() + ")\n\n");
+                           //stringList.add(" (" + changeList.item(i).getFirstChild().getNodeValue() + ")\n\n");
 
                         }
 
@@ -110,8 +116,11 @@ public class MainActivity extends ListActivity {
                             MainActivity.this,
                             android.R.layout.simple_list_item_1,
                             stringList);
-                    listView.setAdapter(adapter);
-                    setContentView(listView);
+                   setListAdapter(adapter);
+
+                   // list.setAdapter(adapter);
+
+                    //setContentView(list);
 
                 }
          }.execute("http://www.boi.org.il/currency.xml");
